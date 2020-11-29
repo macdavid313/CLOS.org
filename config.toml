@@ -1,0 +1,79 @@
+baseURL = "https://macdavid313.xyz/"
+languageCode = "en-us"
+theme = "smol"
+title = "gty"
+hasCJKLanguage = true
+
+# Parameters
+[params]
+    author = "Tianyu Gu"
+    subtitle = "You gotta go away to come back."
+    dateFmt = "Monday, Jan 2 2006"
+
+# Header
+[menu]
+  [[menu.main]]
+        identifier = "about"
+        name = "about"
+        url = "/about/"
+        weight = 1
+
+  [[menu.main]]
+        identifier = "posts"
+        name = "posts"
+        url = "/posts/"
+        weight = 3
+
+  [[menu.main]]
+        identifier = "tags"
+        name = "tags"
+        url = "/tags/"
+        weight = 4
+
+  [[menu.main]]
+        identifier = "cat"
+        name = "cat"
+        url = "/cat/"
+        weight = 5
+
+  [[menu.main]]
+        identifier = "playlists"
+        name = "playlists"
+        url = "/playlists/"
+        weight = 6
+
+  # Footer
+  [[menu.footer]]
+        name = "email"
+        url = "mailto:macdavid313@gmail.com"
+        weight = 1
+
+  [[menu.footer]]
+        name = "PGP"
+        url = "/assets/pgp-public.txt"
+        weight = 2
+
+  [[menu.footer]]
+        name = "github"
+        url = "https://github.com/macdavid313"
+        weight = 3
+
+  [[menu.footer]]
+        name = "instagram"
+        url = "https://www.instagram.com/davidgu357/"
+        weight = 4
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "emacs"
+    tabWidth = 4
+
+[markup.goldmark.renderer]
+  unsafe = true

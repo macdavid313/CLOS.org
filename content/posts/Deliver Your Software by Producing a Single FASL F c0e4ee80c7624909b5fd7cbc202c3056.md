@@ -1,0 +1,100 @@
++++
+title = "Deliver Your Software by Producing a Single FASL File"
+date = 2016-04-20
+tags = ["lisp"]
++++
+
+From the very beginning, just like other ‘rookies’, I’m so confused why a `Hello World` executable file is so big in Common Lisp. Among all the implementations, of course you can argue that ECL can produce a small one, however, except in ECL, that binary file’s size is usually more than 30 MBs and even up to 50 MBs in the case of SBCL (on a 64bit platform).
+
+It didn’t take too long till I realized it’s not fair to argue about that. While C language already has GCC ‘laying’ down on the operating system, Common Lisp’s binary contains all the components like the debuger and even a full-futured compiler. The run time is huge. In this [article](http://fare.livejournal.com/184127.html), `François-René Rideau` had given some points about how to avoid producing a lot of binaries which could be a serious space issue. He suggestes that one binary can provide several entries, and for each entry, one specific entry function will be invoked. This actually doesn’t solve the whole problem but could be taken as a solution that just works.
+
+However, that kind of feature was provided with his Common Lisp building tool `cl-launch`. One can certainly achieve that without `cl-launch`, for example:
+
+```lisp
+(defun main (args)
+  (when (predicate-1 (first args))
+    (do-something-case-1))
+  (when (predicate-2 (first args))
+    (do-something-case-2))
+  ;; ....... do more things ......
+  )
+```
+
+But this looks quite ugly. You mixed different apps or libs within one top-level `main` function, that’s odd, isn’t it?
+
+Therefore, I suggest using FASL files to deliver your software. Compared to the approach of using a binary, the size of FASL files are usually much smaller, but the drawback is obviously clients will have to install a Lisp run time to use your software. As all I know so far, engineers from `[Franz Inc.](http://franz.com/)` take this approach to deliver their products, for example, the `[AllegroGraph](http://franz.com/agraph/support/documentation/current/index.html)`.
+
+Here is a piece of code that shows how to combine several fasls into a single file. It delivers `cl-ppcre` as a library. If you think it’s too painful without using ASDF, just go check out `compile-bundle-op` and `monolithic-compile-bundle-op` from the [documentation](https://common-lisp.net/project/asdf/asdf.html#Operations) page, that will help.
+
+```lisp
+;;;; load.lisp
+;;;; A example shows the idea how to combine several fasls together
+;;;; so that you can delivery your code as a library
+
+;;; suppose now we have a directory whose structure looks like this:
+#|
+├── cl-ppcre-2.0.11
+│   ├── CHANGELOG
+│   ├── README.md
+│   ├── api.lisp
+│   ├── charmap.lisp
+│   ├── charset.lisp
+│   ├── chartest.lisp
+│   ├── cl-ppcre-unicode
+│   │   ├── packages.lisp
+│   │   └── resolver.lisp
+│   ├── cl-ppcre-unicode.asd
+│   ├── cl-ppcre.asd
+│   ├── closures.lisp
+│   ├── convert.lisp
+│   ├── doc
+│   │   └── index.html
+│   ├── errors.lisp
+│   ├── lexer.lisp
+│   ├── optimize.lisp
+│   ├── packages.lisp
+│   ├── parser.lisp
+│   ├── regex-class-util.lisp
+│   ├── regex-class.lisp
+│   ├── repetition-closures.lisp
+│   ├── scanner.lisp
+│   ├── specials.lisp
+│   ├── test
+│   │   ├── packages.lisp
+│   │   ├── perl-tests.lisp
+│   │   ├── perltest.pl
+│   │   ├── perltestdata
+│   │   ├── perltestinput
+│   │   ├── simple
+│   │   ├── tests.lisp
+│   │   ├── unicode-tests.lisp
+│   │   └── unicodetestdata
+│   └── util.lisp
+└── load.lisp
+|#
+;;; we first sepcify the order when compiling file, than write all the fasls into a whole single one.
+(in-package #:cl-user)
+
+(defparameter *cl-ppcre-files*
+  '("packages" "specials" "util" "errors" "charset"
+    "charmap" "chartest" "lexer" "parser" "regex-class"
+    "regex-class-util" "convert" "optimize" "closures"
+    "repetition-closures" "scanner" "api"))
+
+(defun copy-fasls-to (files destination &optional (prefix ""))
+  (let ((buffer (make-array 4096 :element-type '(unsigned-byte 8))))
+    (with-open-file (out destination :direction :output :element-type '(unsigned-byte 8)
+                         :if-does-not-exist :create :if-exists :supersede)
+      (dolist (file files)
+        (let ((filename (concatenate 'string prefix file ".lisp"))
+              (fasl (concatenate 'string prefix file ".fasl")))
+          (compile-file filename)
+          (load fasl)
+          (with-open-file (in fasl :element-type '(unsigned-byte 8))
+            (loop for count = (read-sequence buffer in)
+               while (not (zerop count)) do (write-sequence buffer out :end count))))))))
+
+;;; after loaded, just issue
+;;; (copy-fasls-to *cl-ppcre-files* "/tmp/fasl/cl-ppcre.fasl" "/tmp/fasl/cl-ppcre-2.0.11/") in the repl
+;;; it will produce a single `cl-ppcre.fasl' file and you can load whenever you want
+```
