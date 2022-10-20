@@ -1,0 +1,22 @@
+#+TITLE: gty
+
+我是顾天宇，欢迎！👋 我是一名程序员，目前在澳洲的悉尼生活与工作。
+
+I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work as a *Software Developer*.
+
+#+CAPTION: October 2, 2022
+[[./static/img/avatar.jpg]]
+
+* [[./posts/index.org][博客 (Blog)]]
+
+* 联系方式 (Contact)
+
++ Web name: /macdavid313/
++ Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
++ PGP: [[./static/assets/pgp-public.txt][public key]]
++ Github: [[https://github.com/macdavid313][macdavid313]]
++ Instagram: [[https://www.instagram.com/tianyu727/][tianyu727]]
+
+* 友链 (Friends)
+
++ [[https://www.kawabangga.com/][赖信涛 (laixintao)]] -- 大学好朋友，Python 大师
