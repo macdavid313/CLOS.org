@@ -32,7 +32,7 @@ jobs:
           version: 28.2
 
       - name: Generate site
-        run: emacs -Q --script publish.el
+        run: ./build.sh
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5
