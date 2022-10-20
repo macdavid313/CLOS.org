@@ -71,7 +71,7 @@
              :html-link-up "/posts"
 
              :auto-sitemap t
-             :sitemap-title "博客 (Blog)"
+             :sitemap-title "gty 博客 (Blog)"
              :sitemap-filename "index.org"
              :sitemap-sort-files 'anti-chronologically)
 
