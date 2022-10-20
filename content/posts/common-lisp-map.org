@@ -1,5 +1,5 @@
 #+title: Common Lisp 中的 'map'
-$+date: 2016-11-01
+#+date: 2016-11-01
 #+tags: lisp
 
 #+begin_quote

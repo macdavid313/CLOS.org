@@ -27,6 +27,11 @@
 ;; Load the publishing system
 (require 'ox-publish)
 
+;; Override org-publish-find-date function
+(defun org-publish-find-date (entry project)
+  (let ((ts-str (cl-first (org-publish-find-property entry :date project))))
+    (org-time-string-to-time ts-str)))
+
 ;; Customize the HTML output
 (setq org-html-doctype "html5"
       org-html-html5-fancy t
@@ -40,10 +45,9 @@
 
 ;; Sitemap customisations
 (setq org-export-global-macros
-      '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
+      '(("timestamp" . "@@html:<code class=\"timestamp\">[$1]</code>@@")))
 
 (defun macdavid313/org-sitemap-date-entry-format (entry style project)
-  "Format ENTRY in org-publish PROJECT Sitemap format ENTRY ENTRY STYLE format that includes date."
   (let ((filename (org-publish-find-title entry project)))
     (if (= (length filename) 0)
         (format "*%s*" entry)
@@ -64,7 +68,7 @@
              :base-extension "org"
              :publishing-function 'org-html-publish-to-html
              :publishing-directory (expand-file-name "public")
-             :with-author t
+             :with-author nil
              :with-creator t
              :with-toc nil
              :section-numbers nil
@@ -88,8 +92,7 @@
              :sitemap-title "博客 (Blog)"
              :sitemap-filename "index.org"
              :sitemap-sort-files 'anti-chronologically
-             ;; :sitemap-format-entry 'macdavid313/org-sitemap-date-entry-format
-             )
+             :sitemap-format-entry 'macdavid313/org-sitemap-date-entry-format)
 
        (list "static"
              :base-directory (expand-file-name "content/static")
