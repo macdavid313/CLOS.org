@@ -13,10 +13,10 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 
 * 联系方式 (Contact)
 
-+ Web name: /macdavid313/
 + Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
 + PGP: [[./static/assets/pgp-public.txt][public key]]
 + Github: [[https://github.com/macdavid313][macdavid313]]
++ Twitter: [[https://twitter.com/macdavid313][macdavid313]]
 + Instagram: [[https://www.instagram.com/tianyu727/][tianyu727]]
 
 * 友链 (Friends)
