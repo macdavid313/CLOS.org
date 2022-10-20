@@ -1,6 +1,6 @@
 #+title: Common Lisp Solution to While Language
 #+date: 2019-04-12
-#+tags[]: lisp, hackerrank, compiler
+#+tags: lisp hackerrank compiler
 
 I have written a solution to Hackerrank's problem [[https://www.hackerrank.com/challenges/while-language-fp/problem][While Language]] in Common
 Lisp, solely for fun. Several years ago, I have solved it using OCaml.

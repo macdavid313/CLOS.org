@@ -1,6 +1,6 @@
 #+title: Common Lisp 中的 'map'
 $+date: 2016-11-01
-#+tags[]: lisp
+#+tags: lisp
 
 #+begin_quote
 In many programming languages, map is the name of a higher-order function that

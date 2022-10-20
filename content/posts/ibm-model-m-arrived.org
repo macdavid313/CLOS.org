@@ -1,5 +1,6 @@
 #+title: IBM Model M 来了
 #+date: 2019-12-20
+#+tags: keyboard
 
 心仪许久的 [[https://en.wikipedia.org/wiki/Model_M_keyboard][IBM Model M]] 终于送达了，放在公司桌面上视觉效果出众。
 

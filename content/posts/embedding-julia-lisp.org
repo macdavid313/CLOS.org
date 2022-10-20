@@ -1,12 +1,13 @@
 #+title: Embedding Julia in Lisp
 #+date: 2017-03-19
 #+language: en
+#+tags: julia lisp ffi
 
 Julia is a high-level dynamic programming language designed to address the needs
 of high-performance numerical analysis and computational science while also
 being effective for general-purpose programming, web use or as a specification
-language[fn:1]. I like its Lisp-like macros and [[https://en.wikipedia.org/wiki/Multiple_dispatch][multiple dispatch]] strategy. After
-all, it's from MIT, where LISP happens. Its performance, according to this
+language[fn:1]. I like its Lisp-like macros and [[https://en.wikipedia.org/wiki/Multiple_dispatch][multiple dispatch]] strategy.
+After all, it's from MIT, where LISP happens. Its performance, according to this
 [[http://julialang.org/images/julia-dynamic-2012-tr.pdf][paper]], is often within a factor of two relative to fully optimized C code (and
 thus often an order of magnitude faster than Python or R)[fn:2]. Besides macros
 (or other meta-programming facilities), multiple dispatch and high performance.

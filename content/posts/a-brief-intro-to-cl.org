@@ -1,5 +1,6 @@
 #+title: A Brief Introduction to Common Lisp
 #+date: 2016-07-14
+#+tags: lisp
 
 #+BEGIN_EXPORT html
 <script async class="speakerdeck-embed" data-id="e7654dfaf59b467caaf5e030b5a83513" data-ratio="1.33159947984395" src="//speakerdeck.com/assets/embed.js"></script>

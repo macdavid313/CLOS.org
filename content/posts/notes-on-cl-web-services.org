@@ -1,6 +1,6 @@
 #+title: Notes on Deploying Common Lisp Web Services
 #+date: 2017-03-27
-#+tags[]: lisp, web
+#+tags: lisp web
 
 I’m recently finishing a Common Lisp web service used inside a company. An
 essential part of the reason why I choose Lisp in this case is, *CLOS*, one of
