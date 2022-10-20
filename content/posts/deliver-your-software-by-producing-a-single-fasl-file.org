@@ -1,4 +1,5 @@
 #+title: Deliver Your Software By Producing a Single Fasl File
+#+date: <2016-04-20 Wed>
 
 From the very beginning, just like other 'rookies', I'm so confused why a /Hello
 World/ executable file is so big in Common Lisp. Among all the implementations,

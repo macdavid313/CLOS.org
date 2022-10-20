@@ -1,6 +1,6 @@
 #+title: Embedding Julia in Lisp
+#+date: <2017-03-19 Sun>
 #+language: en
-#+HTML_LINK_HOME: /
 
 Julia is a high-level dynamic programming language designed to address the needs
 of high-performance numerical analysis and computational science while also
@@ -134,7 +134,7 @@ Fast Dynamic Language for Technical Computing, 2012.
 https://arxiv.org/abs/1209.5145
 
 [fn:3] [[https://medium.com/@acidflask/smoothing-data-with-julia-s-generated-functions-c80e240e05f3#.615wk3dle]["Smoothing data with Julia's @generated functions"]]. 5 November 2015.
-Retrieved 9 December 2015. “Julia’s generated functions are closely related to
+Retrieved 9 December 2015. “Julia's generated functions are closely related to
 the multistaged programming (MSP) paradigm popularized by Taha and Sheard, which
 generalizes the compile time/run time stages of program execution by allowing
 for multiple stages of delayed code execution.”
