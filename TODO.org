@@ -1,4 +1,8 @@
 #+title: TODO
 
 * TODO better css style
-* TODO DATE keyword is not recognised properly
++ [[https://taingram.org/blog/org-mode-blog.html][Building a Emacs Org-Mode Blog]]
+* TODO install a discussion/comments system
++ [[https://utteranc.es/][utterances]]
+* DONE DATE keyword is not recognised properly
+CLOSED: [2022-10-20 Thu 21:34]
