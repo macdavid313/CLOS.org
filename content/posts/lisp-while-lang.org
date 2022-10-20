@@ -1,0 +1,528 @@
+#+title: Common Lisp Solution to While Language
+#+date: 2019-04-12
+#+tags[]: lisp, hackerrank, compiler
+
+I have written a solution to Hackerrank's problem [[https://www.hackerrank.com/challenges/while-language-fp/problem][While Language]] in Common
+Lisp, solely for fun. Several years ago, I have solved it using OCaml.
+
+Where does 'fun' come from? In Lisp, it's really easy to construct ASTs. In a
+lot of scenarios, you can effortlessly *transpile* source code into Lisp forms
+and then ask your Lisp implementation to analyse, optimise and execute it. For
+example, after lexing and parsing, I have written a function ~gen-lisp-code~ to
+expose the transpiled Lisp code:
+
+#+BEGIN_SRC lisp
+(pprint (gen-lisp-code "fact := 1 ;
+val := 10000 ;
+cur := val ;
+mod := 1000000007 ;
+
+while ( cur > 1 )
+  do
+   {
+      fact := fact * cur ;
+      fact := fact - fact / mod * mod ;
+      cur := cur - 1
+   } ;
+
+cur := 0"))
+
+#|
+(LAMBDA ()
+  (LET* ((|cur| 0) (|fact| 0) (|mod| 0) (|val| 0))
+    (DECLARE (OPTIMIZE SPEED (SPACE 0) (SAFETY 1))
+             (TYPE (INTEGER 0 2000000000000000000) |cur| |fact| |mod| |val|))
+    (SETF |fact| 1)
+    (SETF |val| 10000)
+    (SETF |cur| |val|)
+    (SETF |mod| 1000000007)
+    (DO ()
+        ((NOT (> |cur| 1)))
+      (SETF |fact| (* |fact| |cur|))
+      (SETF |fact| (- |fact| (* (FLOOR (/ |fact| |mod|)) |mod|)))
+      (SETF |cur| (- |cur| 1)))
+    (SETF |cur| 0)
+    (FORMAT T "~a ~d~%" "cur" |cur|)
+    (FORMAT T "~a ~d~%" "fact" |fact|)
+    (FORMAT T "~a ~d~%" "mod" |mod|)
+    (FORMAT T "~a ~d~%" "val" |val|)))
+|#
+#+END_SRC
+
+Afterwards, the lambda definition can be sent to Lisp's =compile= function and
+generate a Lisp function which can be excuted to print the desired results:
+
+#+BEGIN_SRC lisp
+(funcall (compile nil (gen-lisp-code "fact := 1 ;
+val := 10000 ;
+cur := val ;
+mod := 1000000007 ;
+
+while ( cur > 1 )
+  do
+   {
+      fact := fact * cur ;
+      fact := fact - fact / mod * mod ;
+      cur := cur - 1
+   } ;
+
+cur := 0")))
+
+;; cur 0
+;; fact 531950728
+;; mod 1000000007
+;; val 10000
+;; NIL
+#+END_SRC
+
+Therefore, my solution is actually not an interpreter but a compiler that
+transpiles While language code into Lisp forms. In other languages, writing a
+compiler arguably requires more code; but in Lisp, with its comprehensive
+run-time system, it becomes much easier.
+
+The full solution is shown below:
+
+#+BEGIN_SRC lisp
+;;;; while.lisp
+;;;; A solution to Hackerrank's While Language problem --
+;;;; https://www.hackerrank.com/challenges/while-language-fp/problem
+;;;; Author: Tianyu Gu (macdavid313@gmail.com)
+
+(in-package #:cl-user)
+(defpackage #:while
+  (:use #:cl)
+  (:nicknames #:while-lang)
+  (:export #:gen-lisp-code #:run-program))
+(in-package #:while)
+
+;;; Part I. Lex
+;;; Variable, Numeral,
+;;; AOp: Plus, Minus, Mul, Div, Assign
+;;; BOp: And, Or,
+;;; ROp('<' | '>'): Gt, Lt,
+;;; Other Keywords: True, False, Lparen, Rparen, If, Then, Else,
+;;; --------------- Semicolon, While, Do, Lbracket, Rbracket
+(defstruct token type val)
+
+(defmethod print-object ((obj token) stream)
+  (with-slots (type val) obj
+    (if val
+        (format stream "~A(~A)~%" type val)
+      (format stream "~A~%" type))))
+
+(defun make-var (var)
+  (make-token :type :var :val var))
+
+(defun make-num (num)
+  (make-token :type :num :val num))
+
+(defconstant +keywords-table+
+  (loop with table = (make-hash-table :test 'equal)
+        for (k . v) in '((#\+ . :plus) (#\- . :minus) (#\* . :mul) (#\/ . :div)
+                         (":=" . :assign) ("and" . :and) ("or" . :or) (#\> . :gt) (#\< . :lt)
+                         ("true" . :true) ("false" . :false) (#\( . :lparen) (#\) . :rparen)
+                         ("if" . :if) ("then" . :then) ("else" . :else) (#\; . :semicolon)
+                         ("while" . :while) ("do" . :do) (#\{ . :lbracket) (#\} . :rbracket))
+        do (setf (gethash k table) v)
+        finally (return table)))
+
+(defun make-keyword (part)
+  (make-token :type (gethash part +keywords-table+)))
+
+(defstruct token-stream tokens len ptr)
+
+(defmethod print-object ((obj token-stream) stream)
+  (with-slots (len ptr) obj
+    (format stream "<~d tokens in total, ~d consumed, ~d left.>~%"
+            len ptr (- len ptr))))
+
+(defun next-token (tokens)
+  (with-slots (tokens len ptr) tokens
+    (unless (= ptr len)
+      (let ((rt (aref tokens ptr)))
+        (incf ptr)
+        rt))))
+
+(defun peek-token (tokens)
+  (with-slots (tokens len ptr) tokens
+    (unless (= ptr len)
+      (aref tokens ptr))))
+
+(defun expect-token (tokens expect)
+  (let ((next (next-token tokens)))
+    (unless (eq (token-type next) expect)
+      (error "Parsing error: unexpected token ~A" next))))
+
+(defun token-stream-empty-p (tokens)
+  (with-slots (len ptr) tokens
+    (= len ptr)))
+
+(defun lex-by-pred (in pred)
+  (declare (type stream in))
+  (with-output-to-string (o)
+    (loop for c = (peek-char nil in nil nil)
+          while (and c (funcall pred c))
+          do (write-char (read-char in) o))))
+
+(defun lex-str (in)
+  (declare (type stream in))
+  (lex-by-pred in (lambda (c) (char<= #\a c #\z))))
+
+(defun lex-num (in)
+  (declare (type stream in))
+  (let ((str (lex-by-pred in (lambda (c) (char<= #\0 c #\9)))))
+    (parse-integer str :junk-allowed nil)))
+
+(defun lex (in)
+  (declare (type stream in))
+  (let ((tokens (make-array 0 :element-type 'token :adjustable t :fill-pointer 0)))
+    (loop for c = (peek-char t in nil nil)
+          while c do (cond (;; keywords
+                            (find c #(#\+ #\- #\* #\/ #\> #\< #\( #\) #\; #\{ #\}) :test 'char=)
+                            (vector-push-extend (make-keyword (read-char in)) tokens))
+                           (;; Assign
+                            (char= c #\:)
+                            (read-char in) ;; #\:
+                            (read-char in) ;; #\=
+                            (vector-push-extend (make-keyword ":=") tokens))
+                           (;; a var or a keyword
+                            (char<= #\a c #\z)
+                            (let ((str (lex-str in)))
+                              (if (find str #("and" "or" "true" "false" "if" "then" "else" "while" "do") :test 'string=)
+                                  (vector-push-extend (make-keyword str) tokens)
+                                (vector-push-extend (make-var str) tokens))))
+                           (;; a numeral
+                            (char<= #\0 c #\z)
+                            (vector-push-extend (make-num (lex-num in)) tokens)))
+          finally (return (make-token-stream :tokens tokens :len (length tokens) :ptr 0)))))
+
+;;; Part II. Parse (recursive descent)
+(defun parse (tokens)
+  (let (stmts)
+    (tagbody
+     start
+     (push (parse-statement tokens) stmts)
+     (if (and (peek-token tokens)
+              (eq :semicolon (token-type (peek-token tokens))))
+         (progn
+           (next-token tokens)
+           (go start))
+       (return-from parse (nreverse stmts))))))
+
+(defun parse-statement (tokens)
+  (let ((token (peek-token tokens)))
+    (case (token-type token)
+      (:var (parse-assign tokens))
+      (:if (next-token tokens)
+          (parse-if tokens))
+      (:while (next-token tokens)
+       (parse-while tokens))
+      (t (error "Parsing error.")))))
+
+(defun parse-assign (tokens)
+  (let (var val)
+    (setq var (intern (token-val (next-token tokens)) :while))
+    (expect-token tokens :assign)
+    (setq val (parse-aexpr tokens))
+    `(setf ,var ,val)))
+
+(defun parse-aexpr (tokens)
+  (labels ((parse-factor (tokens)
+             (let ((token (next-token tokens)))
+               (case (token-type token)
+                 (:var (intern (token-val token) :while))
+                 (:num (token-val token))
+                 (:lparen (let ((arith (parse-aexpr tokens)))
+                            (expect-token tokens :rparen)
+                            arith))
+                 (t (error "Parsing error")))))
+           (parse-term (tokens)
+             (let ((left (parse-factor tokens)))
+               (tagbody
+                start
+                (cond ((and (peek-token tokens)
+                            (eq :mul (token-type (peek-token tokens))))
+                       (next-token tokens)
+                       (setq left `(* ,left ,(parse-factor tokens)))
+                       (go start))
+                      ((and (peek-token tokens)
+                            (eq :div (token-type (peek-token tokens))))
+                       (next-token tokens)
+                       (setq left `(floor (/ ,left ,(parse-factor tokens))))
+                       (go start))
+                      (t (return-from parse-term left)))))))
+    (let ((left (parse-term tokens)))
+      (tagbody
+       start
+       (cond ((and (peek-token tokens)
+                   (eq :plus (token-type (peek-token tokens))))
+              (next-token tokens)
+              (setq left `(+ ,left ,(parse-term tokens)))
+              (go start))
+             ((and (peek-token tokens)
+                   (eq :minus (token-type (peek-token tokens))))
+              (next-token tokens)
+              (setq left `(- ,left ,(parse-term tokens)))
+              (go start))
+             (t (return-from parse-aexpr left)))))))
+
+(defun parse-if (tokens)
+  (let (test then else)
+    (setq test (parse-bexpr tokens))
+    (expect-token tokens :then)
+    (expect-token tokens :lbracket)
+    (setq then (parse tokens))
+    (expect-token tokens :rbracket)
+    (expect-token tokens :else)
+    (expect-token tokens :lbracket)
+    (setq else (parse tokens))
+    (expect-token tokens :rbracket)
+    `(if ,test
+         (progn ,@then)
+       (progn ,@else))))
+
+(defun parse-while (tokens)
+  (let (test body)
+    (setq test (parse-bexpr tokens))
+    (expect-token tokens :do)
+    (expect-token tokens :lbracket)
+    (setq body (parse tokens))
+    (expect-token tokens :rbracket)
+    `(do ()
+         ((not ,test))
+       ,@body)))
+
+(defun parse-bexpr (tokens)
+  (labels ((parse-bexpr/1 ()
+             (case (token-type (peek-token tokens))
+               (:true (next-token tokens) t)
+               (:false (next-token tokens) nil)
+               (:lparen (next-token tokens)
+                (let ((bexpr (parse-bexpr tokens)))
+                  (expect-token tokens :rparen)
+                  bexpr))
+               (t (let ((left (parse-aexpr tokens)))
+                    (case (token-type (next-token tokens))
+                      (:gt `(> ,left ,(parse-aexpr tokens)))
+                      (:lt `(< ,left ,(parse-aexpr tokens)))
+                      (t (error "Parsing error"))))))))
+    (let ((left (parse-bexpr/1)))
+      (tagbody
+       start
+       (case (token-type (peek-token tokens))
+         (:and (next-token tokens)
+          (setq left `(and ,left ,(parse-bexpr/1)))
+          (go start))
+         (:or (next-token tokens)
+          (setq left `(or ,left ,(parse-bexpr/1)))
+          (go start))
+         (t (return-from parse-bexpr left)))))))
+
+
+;;; Part III: Compile (transpile, actually)
+(defun generate-symbol-table (stmts)
+  (when stmts
+    (loop with syms = (list)
+          for stmt in stmts
+          do (case (car stmt)
+               (setf (pushnew (second stmt) syms :test 'eq))
+               (do (let ((res (generate-symbol-table (cdddr stmt))))
+                     (when res
+                       (setf syms (concatenate 'list syms res)))))
+               (if (let ((res1 (generate-symbol-table (cdr (third stmt))))
+                         (res2 (generate-symbol-table (cdr (fourth stmt)))))
+                     (setf syms (concatenate 'list syms res1 res2)))))
+          finally (return (sort (delete-duplicates syms :test 'eq)
+                                'string< :key 'symbol-name)))))
+
+(defun gen-lisp-code (program)
+  (let* ((stmts (parse (with-input-from-string (in program)
+                         (lex in))))
+         (syms (generate-symbol-table stmts)))
+    `(lambda ()
+       (let* ,(mapcar (lambda (sym) `(,sym 0)) syms)
+         (declare (optimize speed (space 0) (safety 1))
+                  (type (integer 0 #.(* 2 (expt 10 18))) ,@syms))
+         ,@stmts
+         ,@(mapcar (lambda (sym)
+                     `(format t "~a ~d~%" ,(symbol-name sym) ,sym))
+                   syms)))))
+
+(defun run-program (program)
+  (let ((fn (compile 'nil (gen-lisp-code program))))
+    (funcall fn)))
+
+;;; Entry point
+(in-package #:cl-user)
+
+(defun main ()
+  (while:run-program
+   (with-output-to-string (o)
+     (loop for line = (read-line t nil nil)
+           while line do (write-line line o)))))
+
+;;; uncomment this line if you wanto to submit it to Hackerrank
+;; (main)
+
+;;; test case
+(defvar *test-0*
+  "base := 2 ;
+power := 100 ;
+prime := 1000000007 ;
+
+res := 1 ;
+
+while ( power > 0 ) do {
+        parity := power - ( power / 2 * 2 ) ;
+        if ( power - power / 2 * 2 > 0 ) then
+        {
+            res := res * base ;
+            res := res - res / prime * prime
+        }
+        else
+        {
+            res := res
+        } ;
+
+    base := base * base ;
+    base := base - base / prime * prime ;
+    power :=  power / 2
+}")
+
+(defvar *test-1*
+  "fact := 1 ;
+val := 10000 ;
+cur := val ;
+mod := 1000000007 ;
+
+while ( cur > 1 )
+  do
+   {
+      fact := fact * cur ;
+      fact := fact - fact / mod * mod ;
+      cur := cur - 1
+   } ;
+
+cur := 0")
+
+(defvar *test-2*
+  "a := 267815000 ;
+b := 556456000 ;
+while ( b > 0 ) do
+ {
+	t := b ;
+    b := a - ( a / b ) * b ;
+	a := t
+} ;
+
+res  := a")
+
+(defvar *test-3*
+  "a := 10 ;
+b := 100 ;
+c := 1000 ;
+
+if ( a > b and a > c ) then {
+    largest := a
+}
+else {
+    if ( b > a and b > c ) then {
+        largest := b
+    }
+    else {
+        largest := c
+    }
+ }
+;
+
+if ( a > b and a < c ) then {
+    middle := a
+}
+else {
+    if ( b > a and b < c ) then {
+        middle := b
+    }
+    else {
+        middle := c
+    }
+} ;
+
+if ( a < b and a < c ) then {
+    smallest := a
+}
+else {
+    if ( b < a and b < c ) then {
+        smallest := b
+    }
+    else {
+        smallest := c
+    }
+}")
+
+(defvar *test-4*
+  "sum := 0 ;
+cur := 0 ;
+while ( cur < 10000 ) do
+{
+    cur := cur + 1 ;
+    sum := sum + cur
+} ;
+
+p := 1000000007 ;
+cur := 0 ;
+prod := 1 ;
+
+while ( cur < 10000 ) do
+{
+    cur := cur + 1 ;
+    prod := prod * cur ;
+    prod := prod - prod / p * p
+}")
+
+(defvar *test-5*
+  "a := 1000 ;
+b := 2000 ;
+
+c := b ;
+b := a ;
+a := c ;
+
+c := 0")
+
+(defvar *test-6*
+  "a := 10 ;
+b := 100 ;
+
+if ( a < b ) then
+    {
+        min := a ;
+        max := b
+    }
+else {
+    min := b ;
+    max := a
+    }")
+
+(defvar *test-7*
+  "i := 0 ;
+
+oddsum := 0 ;
+evensum := 0 ;
+
+while ( i < 100 ) do
+{
+    j := 0 ;
+
+    while ( j < i ) do {
+        if ( j - j / 2 * 2 > 0 ) then {
+            oddsum := oddsum + j
+        }
+        else {
+            evensum := evensum + j
+        } ;
+        j := j + 1
+    } ;
+
+    i := i + 1
+}")
+#+END_SRC
