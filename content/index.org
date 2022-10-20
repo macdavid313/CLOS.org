@@ -9,6 +9,11 @@ I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work a
 
 * [[./posts/index.org][博客 (Blog)]]
 
+#+HTML: <div class="blog-entries">
+#+INCLUDE: "posts/index.org" :lines "3-8"
+#+HTML: </div>
+[[./posts/index.org][See more...]]
+
 * 联系方式 (Contact)
 
 + Web name: /macdavid313/

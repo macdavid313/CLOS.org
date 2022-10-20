@@ -38,6 +38,20 @@
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
 <link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
 
+;; Sitemap customisations
+(setq org-export-global-macros
+      '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
+
+(defun macdavid313/org-sitemap-date-entry-format (entry style project)
+  "Format ENTRY in org-publish PROJECT Sitemap format ENTRY ENTRY STYLE format that includes date."
+  (let ((filename (org-publish-find-title entry project)))
+    (if (= (length filename) 0)
+        (format "*%s*" entry)
+      (format "{{{timestamp(%s)}}} [[file:%s][%s]]"
+              (format-time-string "%Y-%m-%d" (org-publish-find-date entry project))
+              entry
+              filename))))
+
 ;; Define the publishing project
 (setq *site-url* "macdavid313.xyz")
 
@@ -46,10 +60,10 @@
 
        (list "pages"
              :recursive nil
-             :base-directory "./content"
+             :base-directory (expand-file-name "content")
              :base-extension "org"
              :publishing-function 'org-html-publish-to-html
-             :publishing-directory "./public"
+             :publishing-directory (expand-file-name "public")
              :with-author t
              :with-creator t
              :with-toc nil
@@ -58,10 +72,10 @@
 
        (list "posts"
              :recursive t
-             :base-directory "./content/posts"
+             :base-directory (expand-file-name "content/posts")
              :base-extension "org"
              :publishing-function 'org-html-publish-to-html
-             :publishing-directory "./public/posts"
+             :publishing-directory (expand-file-name "public/posts")
              :with-author nil
              :with-creator t
              :with-toc t
@@ -71,15 +85,17 @@
              :html-link-up "/posts/index.html"
 
              :auto-sitemap t
-             :sitemap-title "macdavid313's 博客 (Blog)"
+             :sitemap-title "博客 (Blog)"
              :sitemap-filename "index.org"
-             :sitemap-sort-files 'anti-chronologically)
+             :sitemap-sort-files 'anti-chronologically
+             ;; :sitemap-format-entry 'macdavid313/org-sitemap-date-entry-format
+             )
 
        (list "static"
-             :base-directory "./content/static"
-             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico"
+             :base-directory (expand-file-name "content/static")
+             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico\\|webp"
              :recursive t
-             :publishing-directory  "./public/static/"
+             :publishing-directory (expand-file-name "public/static/")
              :publishing-function 'org-publish-attachment)
 
        (list *site-url* :components '("pages" "posts" "static"))))
