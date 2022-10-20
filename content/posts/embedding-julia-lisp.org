@@ -1,5 +1,5 @@
 #+title: Embedding Julia in Lisp
-#+date: <2017-03-19 Sun>
+#+date: 2017-03-19
 #+language: en
 
 Julia is a high-level dynamic programming language designed to address the needs

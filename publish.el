@@ -77,7 +77,7 @@
 
        (list "static"
              :base-directory "./content/static"
-             :base-extension "css\\|txt\\|jpg\\|gif\\|png\\|ico"
+             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico"
              :recursive t
              :publishing-directory  "./public/static/"
              :publishing-function 'org-publish-attachment)
