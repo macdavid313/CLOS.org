@@ -36,12 +36,7 @@
       org-html-head-include-default-style nil
 
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
-<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />"
-
-      org-html-preamble "<nav>
-<a href=\"/\">&lt; Home</a>
-<a href=\"/posts/\">&lt; Posts</a>
-</nav>")
+<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
 
 ;; Define the publishing project
 (setq *site-url* "macdavid313.xyz")
@@ -72,6 +67,8 @@
              :with-toc t
              :section-numbers nil
              :time-stamp-file nil
+             :html-link-home "/"
+             :html-link-up "/posts"
 
              :auto-sitemap t
              :sitemap-title "博客 (Blog)"
