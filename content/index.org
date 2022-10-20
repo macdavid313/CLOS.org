@@ -7,12 +7,9 @@ I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work a
 #+CAPTION: October 2, 2022
 [[./static/img/avatar.jpg]]
 
-* [[./posts/index.org][博客 (Blog)]]
+* 博客 (Blog)
 
-#+HTML: <div class="blog-entries">
-#+INCLUDE: "posts/index.org" :lines "3-8"
-#+HTML: </div>
-[[./posts/index.org][See more...]]
+I write articles from time to time. You can see the full list from [[./posts/index.org][here]].
 
 * 联系方式 (Contact)
 
