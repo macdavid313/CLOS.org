@@ -1,4 +1,4 @@
-#+TITLE: gty
+#+TITLE: macdavid313
 
 我是顾天宇，欢迎！👋 我是一名程序员，目前在澳洲的悉尼生活与工作。
 
@@ -7,13 +7,7 @@ I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work a
 #+CAPTION: October 2, 2022
 [[./static/img/avatar.jpg]]
 
-* 博客 (Blog)
-
-#+HTML: <div class="blog-entries">
-#+INCLUDE: "posts/index.org" :lines "3-8"
-#+HTML: </div>
-
-[[file:./posts/index.org][See more...]]
+* [[./posts/index.org][博客 (Blog)]]
 
 * 联系方式 (Contact)
 

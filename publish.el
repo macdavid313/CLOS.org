@@ -68,10 +68,10 @@
              :section-numbers nil
              :time-stamp-file nil
              :html-link-home "/"
-             :html-link-up "/posts"
+             :html-link-up "/posts/index.html"
 
              :auto-sitemap t
-             :sitemap-title "gty 博客 (Blog)"
+             :sitemap-title "macdavid313's 博客 (Blog)"
              :sitemap-filename "index.org"
              :sitemap-sort-files 'anti-chronologically)
 
