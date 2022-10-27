@@ -1,4 +1,4 @@
-#+title: Personal website
+#+title: macdavid313.xyz
 
 [[https://github.com/macdavid313/macdavid313.xyz/actions/workflows/publish.yml][https://github.com/macdavid313/macdavid313.xyz/actions/workflows/publish.yml/badge.svg?branch=master]]
 
