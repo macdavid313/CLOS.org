@@ -36,12 +36,12 @@
 (setq org-html-doctype "html5"
       org-html-html5-fancy t
 
-      org-html-validation-link t
-      org-html-head-include-scripts nil
-      org-html-head-include-default-style nil
+      org-html-validation-link nil
+      org-html-head-include-scripts t
+      org-html-head-include-default-style t
 
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
-<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+<!--<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />-->")
 
 ;; Sitemap customisations
 (setq org-export-global-macros
