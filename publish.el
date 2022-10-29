@@ -71,7 +71,7 @@
         table,
         th,
         td {
-            border: 1px solid white;
+            border: 1px solid;
         }
 
         .generated {
