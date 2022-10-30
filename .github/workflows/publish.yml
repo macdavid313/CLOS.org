@@ -38,12 +38,12 @@ jobs:
       - name: Generate site
         run: make build
 
-      - name: Auto Minify
-        uses: nizarmah/auto-minify@v2.1
+      - name: HTML/CSS/JS Minifier
+        uses: docker://devatherock/minify-js:1.0.3
         with:
-          directory: "public"
-          overwrite: true
-          js_engine: "babel"
+          input_path: "public"
+          output_path: "public"
+          add_suffix: false
 
       - name: Publish
         if: success()
