@@ -46,7 +46,7 @@
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
 <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
 <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
-<link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Serif+Pro&display=swap\" rel=\"stylesheet\">
+<link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+Pro&family=Source+Serif+Pro&display=swap\" rel=\"stylesheet\">
 <link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />"
 
       org-html-preamble "<nav>
