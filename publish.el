@@ -48,13 +48,13 @@
 <style type=text/css>
         body {
             font-family: sans-serif; monospace;
+            font-size: 120%;
         }
 
         pre,
         code {
-            color: white;
             font-family: 'JetBrains Mono', monospace;
-            font-size: small;
+            font-size: 80%;
         }
 
         blockquote {
