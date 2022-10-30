@@ -6,7 +6,7 @@
 ;; Maintainer: Tianyu Gu <macdavid313@gmail.com>
 ;; Created: October 20, 2022
 ;; Modified: October 20, 2022
-;
+                                        ;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; Code:
@@ -27,6 +27,9 @@
 ;; Load the publishing system
 (require 'ox-publish)
 
+;; Disable evaluating code blocks
+(setq org-export-use-babel nil)
+
 ;; Override org-publish-find-date function
 (defun org-publish-find-date (entry project)
   (let ((ts-str (cl-first (org-publish-find-property entry :date project))))
@@ -38,53 +41,24 @@
 
       org-html-validation-link nil
       org-html-head-include-scripts nil
-      org-html-head-include-default-style nil
+      org-html-head-include-default-style t
 
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
 <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
 <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
 <link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Serif+Pro&display=swap\" rel=\"stylesheet\">
-<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />
-<style type=text/css>
-        body {
-            font-family: sans-serif; monospace;
-            font-size: 120%;
-        }
+<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />"
 
-        pre,
-        code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 80%;
-        }
-
-        blockquote {
-            font-family: 'Source Serif Pro', serif;
-        }
-
-        figure {
-            margin-top: 3%;
-            margin-bottom: 3%;
-            margin-left: 5%;
-            margin-right: 5%;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid;
-        }
-
-        .generated {
-            font-family: 'Source Serif Pro', serif;
-            font-size: small;
-        }
-</style>"
+      org-html-preamble "<nav>
+  <a href=\"/\">&lt; Home</a>
+  <a href=\"/posts/index.html\">&lt; Blog</a>
+</nav>"
 
       org-html-postamble "<footer><div class=\"generated\">Created with %c</div></footer>")
 
 ;; Sitemap customisations
 (setq org-export-global-macros
-      '(("timestamp" . "@@html:<code class=\"timestamp\">[$1]</code>@@")))
+      '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
 
 (defun macdavid313/org-sitemap-date-entry-format (entry style project)
   (let ((filename (org-publish-find-title entry project)))
@@ -124,8 +98,6 @@
              :with-toc t
              :section-numbers t
              :time-stamp-file nil
-             :html-link-home "/"
-             :html-link-up "/posts/index.html"
 
              :auto-sitemap t
              :sitemap-title "博客 (Blog)"
