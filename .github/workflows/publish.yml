@@ -23,6 +23,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
       - name: Set up Emacs
         uses: purcell/setup-emacs@v3.0
         with:
@@ -31,12 +38,12 @@ jobs:
       - name: Generate site
         run: make build
 
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5
+      - name: Auto Minify
+        uses: nizarmah/auto-minify@v2.1
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
+          directory: "public"
+          overwrite: true
+          js_engine: "babel"
 
       - name: Publish
         if: success()
