@@ -6,7 +6,7 @@
 ;; Maintainer: Tianyu Gu <macdavid313@gmail.com>
 ;; Created: October 20, 2022
 ;; Modified: October 20, 2022
-                                        ;
+;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; Code:
