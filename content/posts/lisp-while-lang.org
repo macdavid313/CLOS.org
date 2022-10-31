@@ -80,7 +80,7 @@ transpiles While language code into Lisp forms. In other languages, writing a
 compiler arguably requires more code; but in Lisp, with its comprehensive
 run-time system, it becomes much easier.
 
-The full solution is shown below:
+The full solution is shown below (or from this [[https://gist.github.com/macdavid313/4f1508de7280b36bf692313594d17bb2][Github Gist]]):
 
 #+BEGIN_SRC lisp
 ;;;; while.lisp
