@@ -8,8 +8,7 @@ applies a given function to each element of a list, returning a list of results
 in the same order. It is often called apply-to-all when considered in functional
 form. The concept of a map is not limited to lists: it works for sequential
 containers, tree-like containers, or even abstract containers such as futures
-and promises. ------ Wikipedia[fn:1]
-
+and promises. -- Wikipedia[fn:1]
 #+end_quote
 
 * Scheme 中的 map
@@ -17,9 +16,9 @@ and promises. ------ Wikipedia[fn:1]
 :CUSTOM_ID: scheme-中的-map
 :END:
 =map= 在 Lisp
-语言中是一个经典的操作符。在包括《计算机程序的构造与解释》的诸多教材里，=map=
-都作为一个使用*高阶函数*的经典范例。我们首先考察，在“短小精悍”的 Scheme
-语言中，=map= 的“签名”与使用方法如下：
+语言中是一个经典的操作符。在包括《计算机程序的构造与解释》的诸多教材里， =map=
+都作为一个使用 *高阶函数* 的经典范例。我们首先考察，在“短小精悍”的 Scheme
+语言中， =map= 的“签名”与使用方法如下：
 
 #+begin_src scheme
 ;;; procedure: (map procedure list1 list2 ...)
@@ -28,8 +27,8 @@ and promises. ------ Wikipedia[fn:1]
 (map + '(1 2 3) '(3 2 1)) ;; => (4 4 4)
 #+end_src
 
-=map=
-的作用在此很明了：对于列表中的每个元素应用一遍绝对值函数=abs=，然后返回一个由结果组成的列表。那么这个返回的列表和作为参数的列表之间有没有关系呢？
+=map= 的作用在此很明了：对于列表中的每个元素应用一遍绝对值函数 =abs= ，然后返回一
+个由结果组成的列表。那么这个返回的列表和作为参数的列表之间有没有关系呢？
 
 #+begin_src scheme
 (define lst-1 (list 1 -2 3 -4 5 -6))
@@ -41,9 +40,9 @@ lst-1 ;; => (-1000 -2 3 -4 5 -6)
 lst-2 ;; => (1 2 3 4 5 6)
 #+end_src
 
-可以看到，=map= 并不会带来所谓的“副作用”；也就是说，=map=
-不会肆意造成任何 =mutation=。=map=
-所映射出来的列表完全是一个新的列表。事实上，=map=
+可以看到， =map= 并不会带来所谓的“副作用”；也就是说， =map=
+不会肆意造成任何 =mutation= 。 =map=
+所映射出来的列表完全是一个新的列表。事实上， =map=
 完全可以由下面几行代码所实现[fn:2]：
 
 #+begin_src lisp
@@ -64,11 +63,11 @@ lst-2 ;; => (1 2 3 4 5 6)
                (map-more (cdr ls) (map cdr more))))))))
 #+end_src
 
-也许有人会说， =map= 这种没有“副作用”的机制是否也会随之带来较大的开销。这种担忧的
-确是值得考量的。*在我的理解中，函数式编程的代价即在于此：在效率上的牺牲并不代表
+也许有人会说， =map= 这种没有“副作用”的机制是否也会随之带来较大的开销。这种担忧
+的确是值得考量的。在我的理解中，函数式编程的代价即在于此：在效率上的牺牲并不代表
 我们要鼓吹“消除副作用”、"消除mutation"；函数式的真正意义在于帮助程序员更好的带来
-我们想要的“副作用”、"mutation"，哪怕牺牲一些性能。*如果一个程序在运行之后什么也
-没有改变，那还有什么意义呢？
+我们想要的“副作用”、"mutation"，哪怕牺牲一些性能。如果一个程序在运行之后什么也没
+有改变，那还有什么意义呢？
 
 在这个问题上，"麻雀虽小五脏俱全"的 Scheme 提供了一个 =for-each= 函数：
 
@@ -124,7 +123,7 @@ Common Lisp 虽然在设计方面受到 Scheme
 #+end_src
 
 这个 =map= 和 Scheme 中的 =map=
-颇为相似。但是，第一个参数在此为返回类型，并且这个类型必须是序列（/Sequence/）的子类型；第二个参数才是映射函数，并且其参数的个数与接下来所提供的序列的个数应当一致。也就是说，这个
+颇为相似。但是，第一个参数在此为返回类型，并且这个类型必须是序列（ /Sequence/ ）的子类型；第二个参数才是映射函数，并且其参数的个数与接下来所提供的序列的个数应当一致。也就是说，这个
 =map= 既可以用来映射列表，也可以用来映射数组。Common Lisp
 语言本身在设计上的*正交性*在此也有所体现了。
 
@@ -171,8 +170,8 @@ Common Lisp 虽然在设计方面受到 Scheme
 #+end_src
 
 =map-into= 和 =map=
-很类似，并且都是可以在任意序列对象上操作的函数。但其区别在于，=map-into=
-永远都会*改变一个现有序列的状态*，而不是像 =map=
+很类似，并且都是可以在任意序列对象上操作的函数。但其区别在于， =map-into=
+永远都会 *改变一个现有序列的状态* ，而不是像 =map=
 一样会生成一个新的序列。[[http://www.lispworks.com/documentation/HyperSpec/Body/f_map_in.htm#map-into][HyperSpec]]
 上有一小段代码可以作为 =map-into= 的实现方式：
 
@@ -194,7 +193,7 @@ Common Lisp 虽然在设计方面受到 Scheme
 - 使用 /map-into/ 的目的主要就在于其带来的“副作用”；
 - /map-into/ 的“迭代”次数取决于 /result-sequence/ 和所有 /sequences/
   中长度最小的，也就是说，如果最小长度是 /n/，那么在映射完第 /n/
-  次之后，/map-into/ 就会停止工作。
+  次之后， /map-into/ 就会停止工作。
 
 另外要注意的是，如果 =result-sequence= 是一个拥有填充指针（ /Fill Pointer/ ）的
 向量（ /Vector/ ），那么 =map-into= 在工作时并不会考虑这个填充指针的大小；而在映
@@ -225,8 +224,8 @@ exhausted. -- Section 14.2, CLtL2.
 #+end_quote
 
 所以，虽然 =*vector*= 的长度一开始为
-2，但是在映射完第二个元素后，=*vector*= 并没有
-*exhausted[fn:5]*。上文中，HyperSpec
+2，但是在映射完第二个元素后， =*vector*= 并没有
+*exhausted[fn:5]* 。上文中，HyperSpec
 所给出的实现并未能很好体现这一点，故在此特别指明。更多信息请阅读
 [[http://www.lispworks.com/documentation/HyperSpec/Body/f_map_in.htm#map-into][HyperSpec]]
 和
@@ -283,7 +282,7 @@ exhausted. -- Section 14.2, CLtL2.
 
 =maplist= 只能操作于列表，理解它的关键在于，每一次映射函数得到的参数先是列表（们）
 本身，接着是列表（们）的 =cdr= ，再接着是列表（们） =cdr= 的 =cdr= ，直至在列表
-（们）碰到第一个=nil= 后 =maplist= 停止工作。在此，我们不妨拥 Scheme 来做一个演
+（们）碰到第一个 =nil= 后 =maplist= 停止工作。在此，我们不妨拥 Scheme 来做一个演
 示：
 
 #+begin_src lisp
@@ -334,7 +333,7 @@ exhausted. -- Section 14.2, CLtL2.
 (apply #'nconc '(NIL (1) NIL NIL (3) (4) NIL (5))) ;; => (1 3 4 5)
 #+end_src
 
-=mapcan= 只能操作于列表之上。简单来说，=mapcan= 是把 =mapcar=
+=mapcan= 只能操作于列表之上。简单来说， =mapcan= 是把 =mapcar=
 的结果应用于 =nconc= 后的返回值：
 
 #+begin_src lisp
@@ -343,7 +342,7 @@ exhausted. -- Section 14.2, CLtL2.
          (apply #'mapcar function list more-lists)))
 #+end_src
 
-由于使用了 =nconc= 函数，=mapcan= 也随之带来了副作用。更多信息请阅读
+由于使用了 =nconc= 函数， =mapcan= 也随之带来了副作用。更多信息请阅读
 [[http://www.lispworks.com/documentation/HyperSpec/Body/f_mapc_.htm#mapcan][HyperSpec]]
 和
 [[http://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node90.html#SECTION001184000000000000000][CLtL2]]
@@ -361,7 +360,7 @@ exhausted. -- Section 14.2, CLtL2.
 ;; => ((1 2 3 4) (2 3 4) (3 4) (4))
 #+end_src
 
-=mapcon= 同样也只能操作于列表之上，类似的，=mapcan= 是把 =maplist=
+=mapcon= 同样也只能操作于列表之上，类似的， =mapcan= 是把 =maplist=
 的结果应用于 =nconc= 后的返回值：
 
 #+begin_src lisp
@@ -370,7 +369,7 @@ exhausted. -- Section 14.2, CLtL2.
          (apply #'maplist list more-lists)))
 #+end_src
 
-同样的，由于使用了 =nconc= 函数，=mapcon=
+同样的，由于使用了 =nconc= 函数， =mapcon=
 也随之带来了副作用。更多信息请阅读
 [[http://www.lispworks.com/documentation/HyperSpec/Body/f_mapc_.htm#mapcon][HyperSpec]]
 和
@@ -412,12 +411,18 @@ is in progress, the results are unpredictable, with one exception: if
 the function calls remhash to remove the entry currently being processed
 by the function, or performs a setf of gethash on that entry to change
 the associated value, then those operations will have the intended
-effect. For example: ;;; Alter every entry in MY-HASH-TABLE, replacing
-the value with ;;; its square root. Entries with negative values are
-removed. (maphash #'(lambda (key val) (if (minusp val) (remhash key
-my-hash-table) (setf (gethash key my-hash-table) (sqrt val))))
-my-hash-table) -- Section 16.1, CLtL2
+effect. For example:
 
+;;; Alter every entry in MY-HASH-TABLE, replacing the value with
+;;; its square root. Entries with negative values are
+removed.
+(maphash #'(lambda (key val)
+            (if (minusp val)
+                (remhash key my-hash-table)
+                (setf (gethash key my-hash-table) (sqrt val))))
+         my-hash-table)
+
+-- Section 16.1, CLtL2
 #+end_quote
 
 也就是说，移除一对键值，或者修改当前键所对应的值是可以的，而其他的行为则就是未规
@@ -519,9 +524,9 @@ Common Lisp
        mapcan and mapcon; the lists returned by the function are altered
        in order to concatenate them."/
 
-[fn:7] 基于上文对“副作用”的界定，这样的区分是有道理的。但是仍需注意的是，=mapcan=
-       以及接下来的 =mapcon= 都使用了破坏性函数 =nconc=，所以 =mapcan=
-       与 =mapcon= 也是有破坏性的。引用 CLtL2 中的话来说就是：/"Remember
-       that nconc is a destructive operation, and therefore so are
-       mapcan and mapcon; the lists returned by the function are altered
-       in order to concatenate them."/
+[fn:7] 基于上文对“副作用”的界定，这样的区分是有道理的。但是仍需注意的是，
+       =mapcan= 以及接下来的 =mapcon= 都使用了破坏性函数 =nconc= ，所以 =mapcan= 与
+       =mapcon= 也是有破坏性的。引用 CLtL2 中的话来说就是： "Remember that
+       nconc is a destructive operation, and therefore so are mapcan and mapcon;
+       the lists returned by the function are altered in order to concatenate
+       them."
