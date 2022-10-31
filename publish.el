@@ -41,18 +41,18 @@
 
       org-html-validation-link nil
       org-html-head-include-scripts nil
-      org-html-head-include-default-style t
+      org-html-head-include-default-style nil
+
+      org-html-htmlize-output-type 'css
 
       org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
-<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
-<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
-<link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+Pro&family=Source+Serif+Pro&display=swap\" rel=\"stylesheet\">
-<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />"
+<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />
+<link rel=\"stylesheet\" href=\"/static/css/modus-operandi.css\" type=\"text/css\" />"
 
-      org-html-preamble "<nav>
-  <a href=\"/\">&lt; Home</a>
-  <a href=\"/posts/index.html\">&lt; Blog</a>
-</nav>"
+      org-html-preamble "<div id=\"org-div-home-and-up\">
+  <a href=\"/posts/index.html\">Blog</a>
+  <a href=\"/\">Home</a>
+</div>"
 
       org-html-postamble "<footer><div class=\"generated\">Created with %c</div></footer>")
 
@@ -98,6 +98,8 @@
              :with-toc t
              :section-numbers t
              :time-stamp-file nil
+             ; :html-link-home "/"
+             ; :html-link-up "/posts/index.html"
 
              :auto-sitemap t
              :sitemap-title "博客 (Blog)"
