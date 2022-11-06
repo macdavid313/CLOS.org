@@ -16,6 +16,7 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 + Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
 + PGP: [[./static/assets/pgp-public.txt][public key]]
 + Github: [[https://github.com/macdavid313][macdavid313]]
++ Mastodon: [[https://mas.to/@macdavid313][macdavid313]]
 + Twitter: [[https://twitter.com/macdavid313][macdavid313]]
 + Instagram: [[https://www.instagram.com/tianyu727/][tianyu727]]
 
