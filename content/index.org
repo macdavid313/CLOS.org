@@ -4,8 +4,8 @@
 
 I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work as a *Software Developer*.
 
-#+CAPTION: October 2, 2022
-[[./static/img/avatar.jpg]]
+#+CAPTION: December 31, 2022
+[[./static/img/avatar.png]]
 
 * 博客 (Blog)
 
@@ -16,10 +16,8 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 + Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
 + PGP: [[./static/assets/pgp-public.txt][public key]]
 + Github: [[https://github.com/macdavid313][macdavid313]]
-+ Mastodon: [[https://mas.to/@macdavid313][macdavid313]]
-+ Twitter: [[https://twitter.com/macdavid313][macdavid313]]
 + Instagram: [[https://www.instagram.com/tianyu727/][tianyu727]]
 
 * 友链 (Friends)
 
-+ [[https://www.kawabangga.com/][赖信涛 (laixintao)]] -- 大学好朋友，Python 大师
++ [[https://www.kawabangga.com/][赖信涛 (laixintao)]] -- 大学好友
