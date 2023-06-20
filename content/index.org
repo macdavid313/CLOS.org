@@ -1,11 +1,11 @@
 #+TITLE: macdavid313
 
-我是顾天宇，欢迎！👋 我是一名程序员，目前在澳洲的悉尼生活与工作。
+我是顾天宇，欢迎！👋 我是一名程序员，目前在澳大利亚生活与工作。
 
-I am Tianyu Gu, Welcome! 👋 I currently live in /Sydney, Australia/ and work as a *Software Developer*.
+I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a *Software Engineer*.
 
 #+CAPTION: December 31, 2022
-[[./static/img/avatar.png]]
+[[./static/img/avatar.jpg]]
 
 * 博客 (Blog)
 
