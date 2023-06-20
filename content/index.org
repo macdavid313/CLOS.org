@@ -4,7 +4,7 @@
 
 I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a *Software Engineer*.
 
-#+CAPTION: December 31, 2022
+#+CAPTION: My cat Gorky
 [[./static/img/avatar.jpg]]
 
 * 博客 (Blog)
