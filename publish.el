@@ -102,7 +102,7 @@
              ; :html-link-up "/posts/index.html"
 
              :auto-sitemap t
-             :sitemap-title "博客 (Blog)"
+             :sitemap-title "Blog"
              :sitemap-filename "index.org"
              :sitemap-sort-files 'anti-chronologically
              :sitemap-format-entry 'macdavid313/org-sitemap-date-entry-format)

@@ -1,23 +1,21 @@
-#+TITLE: macdavid313
-
-我是顾天宇，欢迎！👋 我是一名程序员，目前在澳大利亚生活与工作。
+#+TITLE: Tianyu Gu (顾天宇)
 
 I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a *Software Engineer*.
 
 #+CAPTION: My cat Gorky
 [[./static/img/avatar.jpg]]
 
-* 博客 (Blog)
+* Blog
 
 I write articles from time to time. You can see the full list from [[./posts/index.org][here]].
 
-* 联系方式 (Contact)
+* Contact
 
 + Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
 + PGP: [[./static/assets/pgp-public.txt][public key]]
 + Github: [[https://github.com/macdavid313][macdavid313]]
 + Instagram: [[https://www.instagram.com/tianyu727/][tianyu727]]
 
-* 友链 (Friends)
+* Friends
 
 + [[https://www.kawabangga.com/][赖信涛 (laixintao)]] -- 大学好友
