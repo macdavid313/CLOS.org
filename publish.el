@@ -109,7 +109,7 @@
 
        (list "static"
              :base-directory (expand-file-name "content/static")
-             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico\\|webp"
+             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico\\|webp\\|woff2"
              :recursive t
              :publishing-directory (expand-file-name "public/static/")
              :publishing-function 'org-publish-attachment)
