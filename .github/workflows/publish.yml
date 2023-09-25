@@ -51,6 +51,6 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: public
-          fqdn: macdavid313.xyz
+          fqdn: CLOS.org
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

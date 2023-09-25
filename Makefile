@@ -1,5 +1,5 @@
 ## author: Tianyu Gu
-# macdavid313.xyz
+# CLOS.org
 #
 
 .PHONY: build

@@ -70,7 +70,7 @@
               filename))))
 
 ;; Define the publishing project
-(setq *site-url* "macdavid313.xyz")
+(setq *site-url* "CLOS.org")
 
 (setq org-publish-project-alist
       (list
@@ -98,8 +98,8 @@
              :with-toc t
              :section-numbers t
              :time-stamp-file nil
-             ; :html-link-home "/"
-             ; :html-link-up "/posts/index.html"
+                                        ; :html-link-home "/"
+                                        ; :html-link-up "/posts/index.html"
 
              :auto-sitemap t
              :sitemap-title "Blog"
