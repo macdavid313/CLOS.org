@@ -45,7 +45,7 @@ lst-2 ;; => (1 2 3 4 5 6)
 所映射出来的列表完全是一个新的列表。事实上， =map=
 完全可以由下面几行代码所实现[fn:2]：
 
-#+begin_src lisp
+#+begin_src scheme
 ;;; am example implementation of `map` in Scheme
 (define map
   (lambda (f ls . more)
