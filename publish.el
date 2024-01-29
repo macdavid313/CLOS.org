@@ -54,15 +54,9 @@
   <a href=\"/\">Home</a>
 </div>"
 
-      org-html-content-class "content heti heti--classic"
+      org-html-content-class "content"
 
-      org-html-postamble "
-<script src=\"//unpkg.com/heti/umd/heti-addon.min.js\"></script>
-<script>
-  const heti = new Heti('.heti');
-  heti.autoSpacing();
-</script>
-<footer><div class=\"generated\">Created with %c</div></footer>")
+      org-html-postamble "<footer><div class=\"generated\">Created with %c</div></footer>")
 
 ;; Sitemap customisations
 (setq org-export-global-macros
