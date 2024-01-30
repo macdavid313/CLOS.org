@@ -66,21 +66,6 @@
       org-html-content-class "content"
 
       org-html-postamble "<hr/>
-<div class=\"copyright-container\">
-  <div class=\"copyright\">
-    Copyright &copy; 2016-2024 Tianyu Gu<br/>
-    Content on this page is licensed
-      <a rel=\"license\" href=\"https://creativecommons.org/publicdomain/zero/1.0/\">
-         CC0
-      </a> unless otherwise noted.
-  </div>
-  <div class=\"cc-badge\">
-    <a rel=\"license\" href=\"\">
-      <img alt=\"Creative Commons License - CC Zero badge\"
-           src=\"https://upload.wikimedia.org/wikipedia/commons/4/43/CC_Zero_badge.svg\" />
-    </a>
-  </div>
-</div>
 <footer>
   <div class=\"generated\">
     Created with %c on <a href=\"https://www.debian.org/\">Debian</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
