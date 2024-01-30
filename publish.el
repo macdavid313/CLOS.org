@@ -56,12 +56,7 @@
 <div id=\"org-div-home-and-up\">
   <a href=\"/posts/index.html\">Blog</a>
   <a href=\"/\">Home</a>
-</div>
-
-<div id=\"preamble\" class=\"status\">
-  <div id=\"updated\">Updated: %C</div>
-</div>
-"
+</div>"
 
       org-html-content-class "content"
 
