@@ -45,9 +45,11 @@
 
       org-html-htmlize-output-type 'css
 
-      org-html-head-extra "<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
+      org-html-head-extra "<meta name=\"author\" content=\"Tianyu Gu\"/>
+<link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
 <link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />
-<link rel=\"stylesheet\" href=\"/static/css/modus-operandi.css\" type=\"text/css\" />"
+<link rel=\"stylesheet\" media=\"(prefers-color-scheme: light)\" href=\"/static/css/modus-operandi.css\" type=\"text/css\"/>
+<link rel=\"stylesheet\" media=\"(prefers-color-scheme: dark)\"  href=\"/static/css/modus-vivendi.css\"  type=\"text/css\"/>"
 
       org-html-preamble "<div id=\"org-div-home-and-up\">
   <a href=\"/posts/index.html\">Blog</a>
