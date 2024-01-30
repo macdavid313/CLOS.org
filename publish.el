@@ -45,20 +45,47 @@
 
       org-html-htmlize-output-type 'css
 
-      org-html-head-extra "<meta name=\"author\" content=\"Tianyu Gu\"/>
+      org-html-head-extra "
+<meta name=\"author\" content=\"Tianyu Gu\"/>
 <link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
 <link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />
 <link rel=\"stylesheet\" media=\"(prefers-color-scheme: light)\" href=\"/static/css/modus-operandi.css\" type=\"text/css\"/>
 <link rel=\"stylesheet\" media=\"(prefers-color-scheme: dark)\"  href=\"/static/css/modus-vivendi.css\"  type=\"text/css\"/>"
 
-      org-html-preamble "<div id=\"org-div-home-and-up\">
+      org-html-preamble "
+<div id=\"org-div-home-and-up\">
   <a href=\"/posts/index.html\">Blog</a>
   <a href=\"/\">Home</a>
-</div>"
+</div>
+
+<div id=\"preamble\" class=\"status\">
+  <div id=\"updated\">Updated: %C</div>
+</div>
+"
 
       org-html-content-class "content"
 
-      org-html-postamble "<footer><div class=\"generated\">Created with %c</div></footer>")
+      org-html-postamble "<hr/>
+<div class=\"copyright-container\">
+  <div class=\"copyright\">
+    Copyright &copy; 2016-2024 Tianyu Gu<br/>
+    Content on this page is licensed
+      <a rel=\"license\" href=\"https://creativecommons.org/publicdomain/zero/1.0/\">
+         CC0
+      </a> unless otherwise noted.
+  </div>
+  <div class=\"cc-badge\">
+    <a rel=\"license\" href=\"\">
+      <img alt=\"Creative Commons License - CC Zero badge\"
+           src=\"https://upload.wikimedia.org/wikipedia/commons/4/43/CC_Zero_badge.svg\" />
+    </a>
+  </div>
+</div>
+<footer>
+  <div class=\"generated\">
+    Created with %c on <a href=\"https://www.debian.org/\">Debian</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
+  </div>
+</footer>")
 
 ;; Sitemap customisations
 (setq org-export-global-macros
