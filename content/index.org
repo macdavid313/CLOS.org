@@ -7,9 +7,9 @@ I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a
 I write articles from time to time. You can see the full list from [[./posts/index.org][here]].
 
 * Contact
-+ Email: [[mailto:macdavid313@gmail.com][macdavid313@gmail.com]]
-+ PGP: [[./static/assets/pgp-public.txt][public key]]
++ Email: [[mailto:gty@CLOS.org][gty@CLOS.org]]
 + Github: [[https://github.com/macdavid313][macdavid313]]
++ LinkedIn: [[https://www.linkedin.com/in/tianyu-gu-a01631225/][Tianyu Gu]]
 
 * Friends
 + [[https://www.kawabangga.com/][赖信涛 (laixintao)]]
