@@ -33,7 +33,7 @@ jobs:
       - name: Set up Emacs
         uses: purcell/setup-emacs@master
         with:
-          version: 29.2
+          version: 29.3
 
       - name: Generate site
         run: make build
