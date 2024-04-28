@@ -11,5 +11,3 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 + Github: [[https://github.com/macdavid313][macdavid313]]
 + LinkedIn: [[https://www.linkedin.com/in/tianyu-gu-a01631225/][Tianyu Gu]]
 
-* Friends
-+ [[https://www.kawabangga.com/][赖信涛 (laixintao)]]
