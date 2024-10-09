@@ -49,6 +49,11 @@ jobs:
           key: emacs-${{ env.EMACS_VERSION }}-melpa
           path: .packages
 
+      - name: Generate site (Docker)
+        run: |
+          docker run -t --rm -v ./:/work silex/emacs:${{ env.EMACS_VERSION }}-alpine \
+            sh -c "cd /work; emacs -Q --script publish.el"
+
       - name: Generate site
         run: make build
 
