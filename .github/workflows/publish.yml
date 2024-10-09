@@ -44,10 +44,10 @@ jobs:
         run: make build
 
       - name: HTML/CSS/JS Minifier
-        uses: docker://devatherock/minify-js:1.0.3
+        uses: docker://devatherock/minify-js:3.1.0
         with:
-          input_path: "public"
-          output_path: "public"
+          directory: "public"
+          output: "public"
           add_suffix: false
 
       - name: Upload artifact
