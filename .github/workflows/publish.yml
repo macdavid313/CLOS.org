@@ -46,11 +46,6 @@ jobs:
       - name: Generate site
         run: make build
 
-      - name: HTML/CSS/JS Minifier
-        uses: docker://devatherock/minify-js:3.1.0
-        with:
-          directory: "public"
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
