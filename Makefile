@@ -8,7 +8,7 @@ build:
 
 .PHONY: server
 server: build
-	python -m http.server --directory public
+	uv run python3 -m http.server --directory public
 
 .PHONY: clean
 clean:
