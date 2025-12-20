@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  EMACS_VERSION: 29.4
+  EMACS_VERSION: 30.2
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

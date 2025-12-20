@@ -1,4 +1,4 @@
-#+TITLE: Tianyu Gu (顾天宇)
+#+TITLE: Tianyu Gu (顧天宇)
 
 I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a
 *Software Engineer*.
@@ -11,4 +11,4 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 
 * Contact
 + Email: [[mailto:gty@CLOS.org][gty@CLOS.org]]
-+ Github: [[https://github.com/macdavid313][macdavid313]]
++ Codeberg: [[https://codeberg.org/macdavid313][macdavid313]]
