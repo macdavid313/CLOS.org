@@ -50,7 +50,7 @@
 
       org-html-postamble "<hr/>
 <footer>
-  <script src=\"/static/js/heti-addon.min.js\"></script>
+  <script src=\"/static/js/heti-addon.js\"></script>
   <script>
     const heti = new Heti('.heti');
     heti.autoSpacing(); // 自动进行中西文混排美化和标点挤压

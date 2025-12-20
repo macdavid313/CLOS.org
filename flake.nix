@@ -140,6 +140,7 @@
             --eval "(setq httpd-host \"0.0.0.0\")" \
             --eval "(setq httpd-port 8080)" \
             --eval "(setq httpd-root \"./public\")" \
+            --eval "(setq httpd-show-backtrace-when-error t)" \
             --eval "(httpd-batch-start)"
         '';
 
