@@ -1,7 +1,9 @@
 #+TITLE: Tianyu Gu (顧天宇)
+#+STARTUP: showall
 
-I am Tianyu Gu, Welcome! 👋 I currently live in /NSW, Australia/ and work as a
-*Software Engineer*.
+I am Tianyu Gu, Welcome! 👋 I currently live in /Queensland, Australia/ and work
+as a *Software Engineer*. I'm also a postgraduate student in *Environmental
+Management* at the /University of Queensland/.
 
 #+CAPTION: [[https://www.visitnsw.com/destinations/country-nsw/parkes-area/parkes/attractions/memorial-hill][Memorial Hill, Parkes NSW]] (Nov 2, 2024)
 [[./static/img/IMG_9439.jpg]]
