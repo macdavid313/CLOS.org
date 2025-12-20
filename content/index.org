@@ -1,7 +1,7 @@
 #+TITLE: Tianyu Gu (顧天宇)
 #+STARTUP: showall
 
-I am Tianyu Gu (顧天宇), Welcome! 👋
+Welcome! 👋
 
 I currently live in /Queensland, Australia/ and work as a *Software
 Engineer*. I'm also a postgraduate student in *Environmental Management* at the

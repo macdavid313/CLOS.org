@@ -46,7 +46,7 @@
   <a href=\"/\">Home</a>
 </div>"
 
-      org-html-content-class "content heti"
+      org-html-content-class "content heti heti--sans"
 
       org-html-postamble "<hr/>
 <footer>
