@@ -103,7 +103,7 @@
              :section-numbers t
              :time-stamp-file nil
 
-             ;; FIXME
+             ;; NOTE: leave them here for future references
              ;; :html-link-home "/"
              ;; :html-link-up "/posts/index.html"
 
