@@ -34,6 +34,7 @@
       org-html-head-extra "
 <meta name=\"author\" content=\"Tianyu Gu\"/>
 <link rel=\"shortcut icon\" href=\"/static/img/favicon.ico\">
+<link rel=\"stylesheet\" href=\"/static/css/heti.min.css\" type=\"text/css\" />
 <link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\" />
 <link rel=\"stylesheet\" media=\"(prefers-color-scheme: light)\" href=\"/static/css/modus-operandi.css\" type=\"text/css\"/>
 <link rel=\"stylesheet\" media=\"(prefers-color-scheme: dark)\"  href=\"/static/css/modus-vivendi.css\"  type=\"text/css\"/>"
@@ -44,10 +45,15 @@
   <a href=\"/\">Home</a>
 </div>"
 
-      org-html-content-class "content"
+      org-html-content-class "content heti"
 
       org-html-postamble "<hr/>
 <footer>
+  <script src=\"/static/js/heti-addon.min.js\"></script>
+  <script>
+    const heti = new Heti('.heti');
+    heti.autoSpacing(); // 自动进行中西文混排美化和标点挤压
+  </script>
   <div class=\"generated\">
     Created with %c on <a href=\"https://nixos.org/\">NixOS</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
   </div>
@@ -108,7 +114,7 @@
 
        (list "static"
              :base-directory (expand-file-name "content/static")
-             :base-extension "css\\|txt\\|jpe?g\\|gif\\|png\\|ico\\|webp\\|woff2"
+             :base-extension "css\\|js\\|txt\\|jpe?g\\|gif\\|png\\|ico\\|webp\\|woff2"
              :recursive t
              :publishing-directory (expand-file-name "public/static/")
              :publishing-function 'org-publish-attachment)

@@ -1,9 +1,1 @@
-fail_fast: true
-repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
-    hooks:
-      - id: check-yaml
-      - id: check-xml
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
+/nix/store/rkj436hpd7wg6iivic22a1f7qfs3x54j-pre-commit-config.json

@@ -10,3 +10,10 @@ result-*
 
 # Ignore automatically generated direnv output
 .direnv
+
+# Managed by Nix
+.pre-commit-config.yaml
+
+# Ignore built artifacts from Heti
+heti.min.css
+heti-addon.js
