@@ -11,20 +11,6 @@
 ;;
 ;;; Code:
 
-(require 'package)
-(setq package-user-dir (expand-file-name "./.packages"))
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
-
-;; Initialize the package system
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Install dependencies
-(package-install 'htmlize)
-
-;; Load the publishing system
 (require 'ox-publish)
 
 ;; Disable evaluating code blocks
@@ -63,7 +49,7 @@
       org-html-postamble "<hr/>
 <footer>
   <div class=\"generated\">
-    Created with %c on <a href=\"https://www.debian.org/\">Debian</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
+    Created with %c on <a href=\"https://nixos.org/\">NixOS</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
   </div>
 </footer>")
 
@@ -109,8 +95,10 @@
              :with-toc t
              :section-numbers t
              :time-stamp-file nil
-                                        ; :html-link-home "/"
-                                        ; :html-link-up "/posts/index.html"
+
+             ;; FIXME
+             ;; :html-link-home "/"
+             ;; :html-link-up "/posts/index.html"
 
              :auto-sitemap t
              :sitemap-title "Blog"

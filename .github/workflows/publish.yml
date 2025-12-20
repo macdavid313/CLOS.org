@@ -33,23 +33,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Set up Emacs
-        uses: purcell/setup-emacs@master
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
         with:
-          version: ${{ env.EMACS_VERSION }}
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate site
-        run: make build
+        run: nix develop --command build-site
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          # Upload entire repository
           path: "public"
 
       - name: Deploy to GitHub Pages
