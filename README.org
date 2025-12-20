@@ -1,4 +1,6 @@
-#+title: CLOS.org
+#+TITLE: [[https://CLOS.org][CLOS.org]]
+#+AUTHOR: Tianyu Gu
+#+EMAIL: gty@CLOS.org
 
 [[https://github.com/macdavid313/clos.org/actions/workflows/publish.yml][file:https://github.com/macdavid313/clos.org/actions/workflows/publish.yml/badge.svg]]
 
