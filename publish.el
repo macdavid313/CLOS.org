@@ -55,7 +55,7 @@
     heti.autoSpacing(); // 自动进行中西文混排美化和标点挤压
   </script>
   <div class=\"generated\">
-    Created with %c on <a href=\"https://nixos.org/\">NixOS</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
+    Created with %c on <a href=\"https://nixos.org/\">NixOS</a>
   </div>
 </footer>")
 
