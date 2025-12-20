@@ -86,6 +86,20 @@
           epkgs.simple-httpd
         ]);
 
+        # Shared build script used by both the derivation and dev shell
+        buildScript = ''
+          # Create static directories if they don't exist
+          mkdir -p content/static/css content/static/js
+
+          # Copy heti files to static directories
+          cp ${heti}/css/heti.min.css content/static/css/
+          cp ${heti}/js/heti-addon.js content/static/js/
+          chmod u+w content/static/css/heti.min.css content/static/js/heti-addon.js
+
+          # Build the site
+          ${emacs-with-packages}/bin/emacs -Q --script publish.el
+        '';
+
         # Main site package
         site = pkgs.stdenv.mkDerivation {
           name = "CLOS.org";
@@ -94,17 +108,8 @@
           buildInputs = [ emacs-with-packages ];
 
           buildPhase = ''
-            # Create static directories if they don't exist
-            mkdir -p content/static/css content/static/js
-
-            # Copy heti files to static directories
-            cp ${heti}/css/heti.min.css content/static/css/
-            cp ${heti}/js/heti-addon.js content/static/js/
-            chmod u+w content/static/css/heti.min.css content/static/js/heti-addon.js
-
-            # Build the site
             export HOME=$TMPDIR
-            ${emacs-with-packages}/bin/emacs -Q --script publish.el
+            ${buildScript}
           '';
 
           installPhase = ''
@@ -117,13 +122,7 @@
           set -euo pipefail
 
           echo "Copying Heti artifacts..."
-          mkdir -p content/static/css content/static/js
-          cp ${heti}/css/heti.min.css content/static/css/
-          cp ${heti}/js/heti-addon.js content/static/js/
-          chmod u+w content/static/css/heti.min.css content/static/js/heti-addon.js
-
-          echo "Building site with Emacs..."
-          ${emacs-with-packages}/bin/emacs -Q --script publish.el
+          ${buildScript}
           echo "Build complete!"
         '';
 
