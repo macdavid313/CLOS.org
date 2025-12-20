@@ -41,7 +41,6 @@
 
       org-html-preamble "
 <div id=\"org-div-home-and-up\">
-  <a href=\"https://micro.clos.org\">Micro</a>
   <a href=\"/posts/index.html\">Blog</a>
   <a href=\"/\">Home</a>
 </div>"
