@@ -16,4 +16,4 @@ I write articles from time to time. You can see the full list from [[./posts/ind
 * Contact
 + Email: [[mailto:gty@CLOS.org][gty@CLOS.org]]
 + Bluesky: [[https://bsky.app/profile/gty.bsky.social][@gty.bsky.social]]
-+ Codeberg: [[https://codeberg.org/macdavid313][macdavid313]]
++ Codeberg: [[https://codeberg.org/gty][gty]]

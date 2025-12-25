@@ -1,9 +1,9 @@
 ;;; pubish.el --- Description -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2022 Tianyu Gu
+;; Copyright (C) 2025 Tianyu Gu
 ;;
-;; Author: Tianyu Gu <macdavid313@gmail.com>
-;; Maintainer: Tianyu Gu <macdavid313@gmail.com>
+;; Author: Tianyu Gu <gty@CLOS.org>
+;; Maintainer: Tianyu Gu <gty@CLOS.org>
 ;; Created: October 20, 2022
 ;; Modified: October 20, 2022
 ;;
@@ -63,7 +63,7 @@
 (setq org-export-global-macros
       '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
 
-(defun macdavid313/org-sitemap-date-entry-format (entry style project)
+(defun gty/org-sitemap-date-entry-format (entry style project)
   (let ((filename (org-publish-find-title entry project)))
     (if (= (length filename) 0)
         (format "*%s*" entry)
@@ -110,7 +110,7 @@
              :sitemap-title "Blog"
              :sitemap-filename "index.org"
              :sitemap-sort-files 'anti-chronologically
-             :sitemap-format-entry 'macdavid313/org-sitemap-date-entry-format)
+             :sitemap-format-entry 'gty/org-sitemap-date-entry-format)
 
        (list "static"
              :base-directory (expand-file-name "content/static")
